@@ -19,6 +19,7 @@ public class Team {
     public double wealth;
     public ArrayList<Player> list = new ArrayList<Player>();
     public Strategy strategy = new Strategy();
+    public ArrayList<String> coachInterface;
 
     public Team(String Info) {
         String[] StringMass = Info.split("/");

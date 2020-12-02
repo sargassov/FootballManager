@@ -1,66 +1,66 @@
 package Manager;
 import Exception.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import static java.lang.System.out;
 
 public class Corrector {
     public static int InputIntMethod(int minimal, int maximal){
-        int choise = 1000;
-        try{
-            Scanner scanner = new Scanner(System.in);
-            choise = scanner.nextInt();
-            if(choise < minimal) {
-                throw new ChoiseOutOfLowerRangeException("\n\n\t\t\t\tThe choise is less than " + minimal + ". Try again!\n\n", 0);
+        Scanner sc = new Scanner(System.in);
+        int number;
+        do {
+            while (!sc.hasNextInt()) {
+                out.println("\n\n\t\t\t\tYou weren't entered a number! Try again!\n\n");
+                sc.next();
             }
-            if(choise > maximal){
-                throw new ChoiseOutOfUpperRangeException("\n\n\t\t\t\tThe choise is more than " + maximal + ". Try again!\n\n", 0);
+            number = sc.nextInt();
+            if(number < minimal || number > maximal){
+                out.println("\n\n\t\t\t\tThe choise is out of the range between " + minimal + " and " + maximal + ". Try again!");
+                continue;
             }
-            return choise;
-        }
-
-        catch(InputMismatchException ex){
-            out.println("\n\n\t\t\t\tYou weren't entered a number! Try again!\n\n");
-            InputIntMethod(minimal, maximal);
-        }
-
-        catch(ChoiseOutOfLowerRangeException ex){
-            out.println(ex.getMessage());
-            InputIntMethod(minimal, maximal);
-        }
-
-        catch(ChoiseOutOfUpperRangeException ex){
-            out.println(ex.getMessage());
-            InputIntMethod(minimal, maximal);
-        }
-        return choise;
+        } while (number < minimal || number > maximal);
+        return number;
     }
 
-    public static short InputNumberFromTheList(ArrayList<Short>list){
-        short choise = 1000;
-        try{
-            Scanner scanner = new Scanner(System.in);
-            choise = scanner.nextShort();
-            choise--;
-            for(Short num : list){
-                if(num == choise)
-                    return choise;
+
+    public static String InputStringMethod() {
+        Scanner sc = new Scanner(System.in);
+        String line, temp;
+        temp = sc.nextLine();
+        while(!isTheString(temp) || temp.equals("")) {
+            out.println("\n\n\t\t\t\tYou were written an incorrect line. Try again!\n\n");
+            temp = sc.next();
+        }
+        line = temp;
+        return line;
+    }
+
+    public static int InputNumberFromTheList(ArrayList<Short> list){
+        Scanner sc = new Scanner(System.in);
+        boolean isFound = false;
+        int number;
+        do {
+            while (!sc.hasNextInt()) {
+                out.println("\n\n\t\t\t\tYou weren't entered a number! Try again!\n\n");
+                sc.next();
             }
-            choise++;
-            throw new WrongChoiseFromListException("\n\n\t\t\t\tYou were choosed incorrect number. Try again!\n\n");
-        }
-        catch(InputMismatchException ex){
-            out.println("\n\n\t\t\t\tYou weren't entered a number! Try again!\n\n");
-            InputNumberFromTheList(list);
-        }
-        catch(WrongChoiseFromListException ex){
-            out.println(ex.getMessage());
-            InputNumberFromTheList(list);
-        }
-        return choise;
+            number = sc.nextInt();
+            number--;
+            for(short s: list){
+                out.print(s + " ");
+                if(number == s) {
+                    isFound = true;
+                    break;
+                }
+            }
+            if(!isFound) out.println("\n\n\t\t\t\tYou choosed an incorrect player! Try again!\n\n");
+        } while (!isFound);
+        return number;
     }
 
     public static String GetSpace(int value){
@@ -86,46 +86,35 @@ public class Corrector {
         return newWord;
     }
 
-    /*numberCorrector(string& temp, vector<Player>list, short par) {
-        short number = 0;
-        if (isNumber(temp)) {
-            number = atoi(temp.c_str());
-            for (short x = 0; x < list.size(); x++) {
-                if (list[x].number == number || number < 1 || number > 99) {
-                    if (par) {
-                        cout << "\n\n\t\t\tNot correct number. Choose from: ";
-                        for (short z = 1; z < 100; z++) {
-                            short count = 0;
-                            short y = 0;
-                            for (; y < list.size(); y++) {
-                                if (z == list[y].number) {
-                                    count++;
-                                    break;
-                                }
-                            }
-                            if (!count && par) cout << z << " ";
-                        }
-                        cout << "... : ";
-                        cin >> temp;
-                        number = numberCorrector(temp, list, 1);
-                    }
-                    else {
-                        short x = 1 + rand() % 99;
-                        temp = to_string(x);
-                        number = numberCorrector(temp, list, 0);
-                    }
+    public static String Inspacer4Sym(String word){
+        int len = 4 - word.length();
+        String newWord = new String(word.toCharArray());
+        for(int count = 0; count < len; count++){
+            newWord += " ";
+        }
+        return newWord;
+    }
 
-                }
+    public static boolean isTheString(String tech){
+        //int interval;
+        for(int x = 0; x < tech.length(); x++){
+            int interval = (int)(tech.toCharArray()[x]);
+            if ((interval != 32 && interval < 65) || (interval > 90 && interval < 97) || (interval > 122)){
+                return false;
             }
         }
-        else {
-            cout << "\n\n\t\t\tYou weren't wrote number. Write again: ";
-            cin >> temp;
-            if(!par) number = numberCorrector(temp, list, 0);
-            else number = numberCorrector(temp, list, 1);
+        return true;
+    }
+
+    public static String wordToCenter(String tech, int longWord){
+        int longCurrentWord = tech.length();
+        for(int x = 0; x < longWord - longCurrentWord; x++){
+            if(x % 2 == 0) tech = " " + tech;
+            else tech += " ";
         }
+        return tech;
+    }
 
 
-        return number;
-    }*/
+
 }

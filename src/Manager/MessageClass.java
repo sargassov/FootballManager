@@ -19,4 +19,8 @@ public class MessageClass {
     public static void IncorrectName(){
         out.print("\n\n\t\t\tIncorrect name of the club, Write again: ");
     }
+
+    public static void notEnoughMoney() {
+        out.println("\n\n\t\t\t\t\tYour club haven't money to make this offer\n\n");
+    }
 }

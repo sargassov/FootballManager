@@ -27,6 +27,12 @@ public class MenuClass {
         //club = scanner.nextLine();
         club = "Rostov";
         is_club(rfpl, club, lastname);
+
+        compareArrayLists(rfpl);
+    }
+
+    private static void compareArrayLists(Tournament rfpl){
+
     }
 
     private static void is_club(Tournament rfpl, String club, String lastname) {
@@ -36,7 +42,7 @@ public class MenuClass {
                 count++;
                 rfpl.my_team = team;
                 Manager manager = new Manager(lastname);
-                rfpl.my_team.coaches.add(0, manager);
+                rfpl.my_team.coaches.set(0, manager);
                 break;
             }
         }
@@ -51,7 +57,7 @@ public class MenuClass {
     public static void GameMenu(Tournament rfpl){
         toPrintMenu(rfpl.interfaces.get(0).fields);
         int choise = Corrector.InputIntMethod(0, 9);
-        rfpl.UserInterfaces.get(choise).Do(rfpl);
+        rfpl.userInterfaces.get(choise).Do(rfpl);
     }
 
     private static void toPrintMenu(ArrayList<String> fields) {

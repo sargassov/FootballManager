@@ -1,7 +1,7 @@
 package Manager;
 
 public class DefenderCoach extends Coach {
-    DefenderCoach(String name){
+    public DefenderCoach(String name){
         this.name = name;
     }
 }

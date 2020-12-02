@@ -7,9 +7,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static java.lang.System.out;
 import static java.lang.System.exit;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 
 public class NewGameCreator {
     public static void CreateGame() throws IOException {
@@ -24,6 +27,7 @@ public class NewGameCreator {
         FootballCalendar.SheduleCreator(rfpl);
         FootballCalendar.EditCalendar(rfpl);
         Interface.CreateInterfaces(rfpl);
+        Interface.readCoachInterface(rfpl);
         MenuClass.GameMenu(rfpl);
 
 

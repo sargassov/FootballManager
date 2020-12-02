@@ -222,7 +222,7 @@ Bayramyan Khoren/1992/Arm/Rostov/Mid/5/27/76/29/4.4/8/19
 Mamaev Pavel/1988/Rus/Rostov/Mid/5/32/83/20/8.9/67/10
 Osipenko Maxim/1994/Rus/Rostov/Def/4/73/21/32/4.0/5/55
 Eremenko Roman/1987/Fin/Rostov/Mid/4/29/81/28/8.3/81/7
-Zainutdinov Baktiyor/1998/Kaz/Rostov/Mid/8/67/26/23/3.9/4/18
+Zainutdinov Baktiyor/1998/Kaz/Rostov/Mid/8/26/67/23/3.9/4/18
 Kozlov Alexey/1986/Rus/Rostov/Def/4/77/28/29/4.3/3/34
 Normann Mathias/1996/Nor/Rostov/Mid/3/24/80/17/7.9/32/17
 Pesyakov Sergey/1988/Rus/Rostov/Gk/74/7/8/9/4.0/5/30

@@ -1,6 +1,9 @@
 package Manager;
-
 import GameMenuInterfaces.*;
+import TeamMenuOptions.*;
+import TrainingMenuOptions.CoachesMenu;
+import TrainingMenuOptions.TrainingMenuOptionsInterface;
+import TrainingMenuOptions.TrainingProgramsMenu;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,14 +13,17 @@ import static java.lang.System.out;
 public class Tournament {
     String name;
     Team[] teams;
-    ArrayList<Player>youthPool;
+    public ArrayList<Player>youthPool;
     ArrayList<ArrayList<DayMatch>>shedule;
     public ArrayList<ArrayList<Day>> calendar;
-    ArrayList<GameMenuInterface> UserInterfaces;
+    public ArrayList<GameMenuInterface> userInterfaces;
+    public ArrayList<TeamMenuOptionsInterface> TeamMenuInterfaces;
+    public ArrayList<TrainingMenuOptionsInterface> TrainingMenuInterfaces;
     public Team my_team = null;
     public ArrayList<Strategy>strategies;
     public ArrayList<Interface>interfaces;
     public Calendar currentDate;
+    public boolean wasAtTheYouthAcademy = false;
 
     public Tournament(String NameOfLeague){
         name = NameOfLeague;
@@ -27,8 +33,26 @@ public class Tournament {
         strategies = null;
         CalendarConstructor();
         IntefaceConstructor();
+        TeamMenuInterfacesConstructor();
+        TrainingMenuInterfaceConstructor();
         interfaces = null;
         currentDate = new GregorianCalendar(2019, 7,1);
+    }
+
+    private void TrainingMenuInterfaceConstructor(){
+        TrainingMenuInterfaces = new ArrayList<>();
+        TrainingMenuInterfaces.add(new TrainingMenuOptions.ToPreviousMenu());
+        TrainingMenuInterfaces.add(new CoachesMenu());
+        TrainingMenuInterfaces.add(new TrainingProgramsMenu());
+    }
+    private void TeamMenuInterfacesConstructor(){
+        TeamMenuInterfaces = new ArrayList<TeamMenuOptionsInterface>();
+        TeamMenuInterfaces.add(new ToPreviousMenu());
+        TeamMenuInterfaces.add(new ListPlayerOption());
+        TeamMenuInterfaces.add(new TeamTacticOption());
+        TeamMenuInterfaces.add(new CaptainChoosingOption());
+        TeamMenuInterfaces.add(new PlayerEditorOption());
+        TeamMenuInterfaces.add(new YouthAcademyOption());
     }
 
     private void SheduleConstructor(){
@@ -58,17 +82,17 @@ public class Tournament {
     }
 
     private void IntefaceConstructor(){
-        UserInterfaces = new ArrayList<GameMenuInterface>();
-        UserInterfaces.add(new QuitInterface());
-        UserInterfaces.add(new NextMatchMenuInterface());
-        UserInterfaces.add(new TeamMenuInterface());
-        UserInterfaces.add(new TrainingMenuInterface());
-        UserInterfaces.add(new TransferMenuInterface());
-        UserInterfaces.add(new CalendarMenuInterface());
-        UserInterfaces.add(new FinanceMenuInterface());
-        UserInterfaces.add(new StadiumMenuInterface());
-        UserInterfaces.add(new LeagueMenuInterface());
-        UserInterfaces.add(new CheatCodeMenuInterface());
+        userInterfaces = new ArrayList<GameMenuInterface>();
+        userInterfaces.add(new QuitInterface());
+        userInterfaces.add(new NextMatchMenuInterface());
+        userInterfaces.add(new TeamMenuInterface());
+        userInterfaces.add(new TrainingMenuInterface());
+        userInterfaces.add(new TransferMenuInterface());
+        userInterfaces.add(new CalendarMenuInterface());
+        userInterfaces.add(new FinanceMenuInterface());
+        userInterfaces.add(new StadiumMenuInterface());
+        userInterfaces.add(new LeagueMenuInterface());
+        userInterfaces.add(new CheatCodeMenuInterface());
     }
 
 }

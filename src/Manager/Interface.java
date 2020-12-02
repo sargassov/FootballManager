@@ -1,8 +1,7 @@
 package Manager;
 
-import GameMenuInterfaces.GameMenuInterface;
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,8 +11,8 @@ import static java.lang.System.out;
 
 public class Interface {
     public ArrayList<String> fields;
-    Interface(){}
-    Interface(String fileName) {
+    public Interface(){}
+    public Interface(String fileName) {
         try (FileReader InInteface = new FileReader(fileName)){
             BufferedReader reader = new BufferedReader(InInteface);
             fields = new ArrayList<String>();
@@ -35,8 +34,8 @@ public class Interface {
         rfpl.interfaces.add(GameMenuInterface);
         Interface NextMatchInterface = new Interface();
         rfpl.interfaces.add(NextMatchInterface);
-        Interface TeamInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\Football " +
-                "Manager\\src\\Manager\\TeamInterface.txt");
+        Interface TeamInterface = new Interface
+                ("C:\\Users\\Сергей\\IdeaProjects\\Football Manager\\src\\Manager\\TeamInterface.txt");
         rfpl.interfaces.add(TeamInterface);
         Interface TrainingInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\" +
                 "Football Manager\\src\\Manager\\TrainingInterface.txt");
@@ -55,5 +54,17 @@ public class Interface {
         rfpl.interfaces.add(LeagueInterface);
         Interface CheatCodeInterface = new Interface();
         rfpl.interfaces.add(CheatCodeInterface);
+    }
+
+    public static void readCoachInterface(Tournament rfpl) throws IOException {
+        try (FileReader coachInt = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\Football Manager\\src\\Manager\\coach.txt")) {
+            rfpl.my_team.coachInterface = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(coachInt);
+            String line = reader.readLine();
+            while (line != null) {
+                rfpl.my_team.coachInterface.add(line);
+                line = reader.readLine();
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 package Manager;
 
 public class ForwardCoach extends Coach {
-    ForwardCoach(String name){
+    public ForwardCoach(String name){
         this.name = name;
     }
 }
