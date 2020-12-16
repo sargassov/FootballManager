@@ -1,13 +1,16 @@
 package Tables;
 import Manager.*;
+import com.sun.java.accessibility.util.EventID;
 
 import java.util.ArrayList;
 
-import static java.lang.System.out;
-import static java.lang.System.setProperty;
+import static java.lang.System.*;
 import static jdk.nashorn.internal.objects.NativeString.substring;
 
 public class Table {
+    static String del = "XXXXXXXXXXXXXXXXXXXXXXXXXXX";
+    static String emptySpace51 = "                                                   ";
+    static Interface cloneTransferTable;
     public static void ListPlayerOptionTable(Tournament rfpl){
         ArrayList<Player>temp = rfpl.my_team.list;
         int playerCount = 0;
@@ -68,7 +71,6 @@ public class Table {
     }
 
     public static void coachesSlotsTable(Tournament rfpl){
-        String del = "XXXXXXXXXXXXXXXXXXXXXXXXXXX";
         ArrayList<String> temporary = new ArrayList<>(rfpl.my_team.coachInterface);
         for(int x = 0, y = 0; x < 26; x++){
             if(x == 4){
@@ -101,6 +103,76 @@ public class Table {
             out.println(temporary.get(x));
         }
 
+    }
+
+    public static void transferTable(Tournament rfpl, int alterTeam, int yourClubList, int alterClubList){
+        cloneTransferTable = new Interface(rfpl.transferPrintInterface);
+        for(int x = 0; x < cloneTransferTable.fields.size(); x++){
+            if(x == 2) enterTeamsIntable(rfpl, alterTeam);
+            if(x > 6) {
+                enterPlayerIntable(rfpl, yourClubList, alterTeam, alterClubList, x);
+                yourClubList++;
+                if(yourClubList == rfpl.my_team.list.size()) yourClubList = 0;
+                alterClubList++;
+                if(alterClubList == rfpl.teams[alterTeam].list.size()) alterClubList = 0;
+            }
+            out.println(cloneTransferTable.fields.get(x));
+        }
+    }
+
+    private static void enterPlayerIntable(Tournament rfpl, int yourClubList, int alterTeam, int alterClubList, int str){
+        String tech = cloneTransferTable.fields.get(str);
+        Player yourPlayer = rfpl.my_team.list.get(yourClubList);
+        Player alterPlayer = rfpl.teams[alterTeam].list.get(alterClubList);
+        String yourPlayerInfo = enterPlayerInfo(yourPlayer);
+        String alterPlayerInfo = enterPlayerInfo(alterPlayer);
+        tech = tech.replaceFirst(emptySpace51, yourPlayerInfo);
+        tech = tech.replaceFirst(emptySpace51, alterPlayerInfo);
+        cloneTransferTable.fields.set(str, tech);
+    }
+
+    private static String enterPlayerInfo(Player player){
+        String info = " " + player.name;
+        info = Corrector.Inspacer(info) + " ";
+        info += player.power + Corrector.GetSpace(4);
+        if(player.position.equals("Forw")) info += player.position + Corrector.GetSpace(4);
+        else if(player.position.equals("Gk")) info += player.position + Corrector.GetSpace(6);
+        else info += player.position + Corrector.GetSpace(5);
+        info += player.price;
+        info = string51Chars(info);
+        return info;
+    }
+
+    private static String string51Chars(String str){
+        if(str.length() < 51){
+            for(int x = str.length(); x < 51; x++){
+                str += " ";
+            }
+        }
+        return str;
+    }
+
+    private static void enterTeamsIntable(Tournament rfpl, int alterTeam){
+        String name = rfpl.my_team.name;
+        name = enterWealth(rfpl, name);
+        String alterTeamName = rfpl.teams[alterTeam].name;
+        alterTeamName = enterWealth(rfpl, alterTeamName);
+        String tech = cloneTransferTable.fields.get(2);
+        name = Corrector.wordToCenter(name, 27);
+        alterTeamName = Corrector.wordToCenter(alterTeamName, 27);
+        tech = tech.replaceFirst(del,name);
+        tech = tech.replaceFirst(del,alterTeamName);
+        cloneTransferTable.fields.set(2, tech); ////////////////ТУТ ПРОБЛЕМЫ
+
+    }
+
+    private static String enterWealth(Tournament rfpl, String name){
+        for(Team team : rfpl.teams){
+            if(team.name.equals(name)){
+                name = name + " " + team.wealth + " mln.";
+            }
+        }
+        return name;
     }
 
     private static String getIntensity(Coach c){

@@ -56,6 +56,15 @@ public class Interface {
         rfpl.interfaces.add(CheatCodeInterface);
     }
 
+    public Interface(Interface other){
+        int x = 0;
+        this.fields = new ArrayList<>();
+        for(String s : other.fields){
+            this.fields.add(s);
+            x++;
+        }
+    }
+
     public static void readCoachInterface(Tournament rfpl) throws IOException {
         try (FileReader coachInt = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\Football Manager\\src\\Manager\\coach.txt")) {
             rfpl.my_team.coachInterface = new ArrayList<>();
@@ -67,4 +76,5 @@ public class Interface {
             }
         }
     }
+
 }

@@ -4,6 +4,9 @@ import TeamMenuOptions.*;
 import TrainingMenuOptions.CoachesMenu;
 import TrainingMenuOptions.TrainingMenuOptionsInterface;
 import TrainingMenuOptions.TrainingProgramsMenu;
+import TransferMenuOptions.BuyingPlayerOption;
+import TransferMenuOptions.SellPlayerOption;
+import TransferMenuOptions.TransferMenuOptionsInterface;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,17 +15,20 @@ import static java.lang.System.out;
 
 public class Tournament {
     String name;
-    Team[] teams;
+    public Team[] teams;
     public ArrayList<Player>youthPool;
     ArrayList<ArrayList<DayMatch>>shedule;
     public ArrayList<ArrayList<Day>> calendar;
     public ArrayList<GameMenuInterface> userInterfaces;
     public ArrayList<TeamMenuOptionsInterface> TeamMenuInterfaces;
     public ArrayList<TrainingMenuOptionsInterface> TrainingMenuInterfaces;
+    public ArrayList<TransferMenuOptionsInterface> TransferMenuInterfaces;
+    //public ArrayList<TransferMenuOptionsInterface> TransferMenuInterfaces;
     public Team my_team = null;
     public ArrayList<Strategy>strategies;
     public ArrayList<Interface>interfaces;
     public Calendar currentDate;
+    public Interface transferPrintInterface;
     public boolean wasAtTheYouthAcademy = false;
 
     public Tournament(String NameOfLeague){
@@ -35,8 +41,18 @@ public class Tournament {
         IntefaceConstructor();
         TeamMenuInterfacesConstructor();
         TrainingMenuInterfaceConstructor();
+        TransferMenuInterfaceConstructor();
         interfaces = null;
         currentDate = new GregorianCalendar(2019, 7,1);
+        transferPrintInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\" +
+                "Football Manager\\src\\Manager\\transfer_interface.txt");
+    }
+
+    private void TransferMenuInterfaceConstructor(){
+        TransferMenuInterfaces = new ArrayList<>();
+        TransferMenuInterfaces.add(new TransferMenuOptions.ToPreviousMenu());
+        TransferMenuInterfaces.add(new BuyingPlayerOption());
+        TransferMenuInterfaces.add(new SellPlayerOption());
     }
 
     private void TrainingMenuInterfaceConstructor(){
@@ -46,7 +62,7 @@ public class Tournament {
         TrainingMenuInterfaces.add(new TrainingProgramsMenu());
     }
     private void TeamMenuInterfacesConstructor(){
-        TeamMenuInterfaces = new ArrayList<TeamMenuOptionsInterface>();
+        TeamMenuInterfaces = new ArrayList<>();
         TeamMenuInterfaces.add(new ToPreviousMenu());
         TeamMenuInterfaces.add(new ListPlayerOption());
         TeamMenuInterfaces.add(new TeamTacticOption());

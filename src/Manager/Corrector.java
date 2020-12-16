@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import static java.lang.System.out;
 
 public class Corrector {
@@ -115,6 +117,22 @@ public class Corrector {
         return tech;
     }
 
-
-
+    public static short getNumber(Tournament rfpl){
+        short number;
+        ArrayList<Short>usedNumbers = new ArrayList<>(rfpl.my_team.list.stream()
+                .map(p->p.number).sorted().collect(Collectors.toList()));
+        ArrayList<Short>freeNumbers = new ArrayList<>();
+        for(short x = 1; x < 100; x++) if(!usedNumbers.contains(x)) freeNumbers.add(x);
+        do{
+            number = (short) InputIntMethod(1, 99);
+            if(!freeNumbers.contains(number)){
+                out.println("Wrong number! You can take only: ");
+                for(int y = 0; y < freeNumbers.size(); y++){
+                    out.print(freeNumbers.get(y) + " ");
+                    if(y % 9 == 0 && y != 0) out.println();
+                }
+            }
+        } while(!freeNumbers.contains(number));
+        return number;
+    }
 }
