@@ -11,9 +11,11 @@ public class CalendarMenuInterface implements GameMenuInterface {
 
     @Override
     public void Do(Tournament rfpl) {
-        toPrintMenu(rfpl.interfaces.get(5).fields);
-        int choise = Corrector.InputIntMethod(0, 2);
-        rfpl.TransferMenuInterfaces.get(choise).GetOption(rfpl);
+        while(true){
+            toPrintMenu(rfpl.interfaces.get(5).fields);
+            int choise = Corrector.InputIntMethod(0, 2);
+            rfpl.CalendarMenuInterfaces.get(choise).GetOption(rfpl);
+        }
     }
 
     @Override

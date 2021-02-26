@@ -1,4 +1,8 @@
 package Manager;
+import CalendarMenuOptions.CalendarMenuOptionsInterface;
+import CalendarMenuOptions.PlayingCalendar;
+import CalendarMenuOptions.VisualCalendar;
+import FinanceMenuOptions.*;
 import GameMenuInterfaces.*;
 import TeamMenuOptions.*;
 import TrainingMenuOptions.CoachesMenu;
@@ -17,18 +21,20 @@ public class Tournament {
     String name;
     public Team[] teams;
     public ArrayList<Player>youthPool;
-    ArrayList<ArrayList<DayMatch>>shedule;
+    public ArrayList<ArrayList<DayMatch>>shedule;
     public ArrayList<ArrayList<Day>> calendar;
     public ArrayList<GameMenuInterface> userInterfaces;
     public ArrayList<TeamMenuOptionsInterface> TeamMenuInterfaces;
     public ArrayList<TrainingMenuOptionsInterface> TrainingMenuInterfaces;
     public ArrayList<TransferMenuOptionsInterface> TransferMenuInterfaces;
-    //public ArrayList<TransferMenuOptionsInterface> TransferMenuInterfaces;
+    public ArrayList<CalendarMenuOptionsInterface> CalendarMenuInterfaces;
+    public ArrayList<FinanceMenuOptionsInterface> FinanceMenuInterfaces;
     public Team my_team = null;
     public ArrayList<Strategy>strategies;
     public ArrayList<Interface>interfaces;
     public Calendar currentDate;
     public Interface transferPrintInterface;
+    public Interface visualCalendarInterface;
     public boolean wasAtTheYouthAcademy = false;
 
     public Tournament(String NameOfLeague){
@@ -42,10 +48,28 @@ public class Tournament {
         TeamMenuInterfacesConstructor();
         TrainingMenuInterfaceConstructor();
         TransferMenuInterfaceConstructor();
+        CalendarMenuInterfacesConstructor();
+        FinanceMenuInterfacesConstructor();
         interfaces = null;
         currentDate = new GregorianCalendar(2019, 7,1);
         transferPrintInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\" +
                 "Football Manager\\src\\Manager\\transfer_interface.txt");
+        visualCalendarInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\" +
+                "Football Manager\\src\\Manager\\visualCalendarInterface.txt");
+    }
+
+    private void FinanceMenuInterfacesConstructor(){
+        FinanceMenuInterfaces = new ArrayList<>();
+        FinanceMenuInterfaces.add(new FinanceMenuOptions.ToPreviousMenu());
+        FinanceMenuInterfaces.add(new RevenueOption());
+        FinanceMenuInterfaces.add(new ExpensesOption());
+    }
+
+    private void CalendarMenuInterfacesConstructor(){
+        CalendarMenuInterfaces = new ArrayList<>();
+        CalendarMenuInterfaces.add(new CalendarMenuOptions.ToPreviousMenu());
+        CalendarMenuInterfaces.add(new PlayingCalendar());
+        CalendarMenuInterfaces.add(new VisualCalendar());
     }
 
     private void TransferMenuInterfaceConstructor(){
@@ -63,7 +87,7 @@ public class Tournament {
     }
     private void TeamMenuInterfacesConstructor(){
         TeamMenuInterfaces = new ArrayList<>();
-        TeamMenuInterfaces.add(new ToPreviousMenu());
+        TeamMenuInterfaces.add(new TeamMenuOptions.ToPreviousMenu());
         TeamMenuInterfaces.add(new ListPlayerOption());
         TeamMenuInterfaces.add(new TeamTacticOption());
         TeamMenuInterfaces.add(new CaptainChoosingOption());

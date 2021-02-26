@@ -46,7 +46,8 @@ public class Interface {
         Interface CalendarInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\Football " +
                 "Manager\\src\\Manager\\CalendarInterface.txt");
         rfpl.interfaces.add(CalendarInterface);
-        Interface FinanceInterface = new Interface();
+        Interface FinanceInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\Football " +
+                "Manager\\src\\Manager\\financeMenu.txt");
         rfpl.interfaces.add(FinanceInterface);
         Interface StadiumInterface = new Interface();
         rfpl.interfaces.add(StadiumInterface);

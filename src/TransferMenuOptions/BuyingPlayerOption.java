@@ -5,19 +5,24 @@ import Manager.Interface;
 import Manager.Player;
 import Manager.Tournament;
 import Tables.Table;
+import Tables.TransferTable;
 
 import java.io.IOException;
 
 public class BuyingPlayerOption implements TransferMenuOptionsInterface {
+
+    private int alterTeam = 0;
+    private int yourClubList = 0;
+    private int alterClubList = 0;
+
     @Override
     public void GetOption(Tournament rfpl) {
-        int alterTeam = 0, yourClubList = 0, alterClubList = 0;
         while(true){
             System.out.println("\n");
             System.out.print(Corrector.GetSpace(38));
             Corrector.wordUpperCase("transfer list menu");
             System.out.println("\n\n");
-            Table.transferTable(rfpl, alterTeam, yourClubList, alterClubList);
+            new TransferTable(alterTeam, yourClubList, alterClubList).toPrint(rfpl);
             System.out.println("\nTO BUY PLAYER - \"7\"\nNext team - \"1\" Prevoius team - \"2\"\n" +
                     "Next your player - \"3\" Prevois your player - \"4\"\n" +
                     "Next alter player - \"5\" Prevoius alter player - \"6\"\n" +
@@ -26,13 +31,20 @@ public class BuyingPlayerOption implements TransferMenuOptionsInterface {
             if(choise == 0) break;
             else if(choise == 1) {
                 alterTeam++;
-                if(alterTeam == rfpl.teams.length) alterTeam = 0;
+                while(alterTeam == rfpl.teams.length || rfpl.teams[alterTeam].name.equals(rfpl.my_team.name)){
+                    if(alterTeam == rfpl.teams.length) alterTeam = 0;
+                    if(rfpl.teams[alterTeam].name.equals(rfpl.my_team.name)) alterTeam++;
+                }
                 yourClubList = 0;
                 alterClubList = 0;
             }
             else if(choise == 2){
                 alterTeam--;
-                if(alterTeam < 0)  alterTeam = rfpl.teams.length - 1;
+                while(alterTeam < 0 || rfpl.teams[alterTeam].name.equals(rfpl.my_team.name)){
+                    if(alterTeam < 0)  alterTeam = rfpl.teams.length - 1;
+                    if(rfpl.teams[alterTeam].name.equals(rfpl.my_team.name)) alterTeam--;
+                }
+
                 yourClubList = 0;
                 alterClubList = 0;
             }

@@ -2,6 +2,7 @@ package TeamMenuOptions;
 import Manager.Corrector;
 import Manager.Player;
 import Manager.Tournament;
+import Tables.ListPlayerOptionTable;
 import Tables.Table;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ import static java.lang.System.out;
 public class ListPlayerOption implements TeamMenuOptionsInterface {
     @Override
     public void GetOption(Tournament rfpl) {
-        Table.ListPlayerOptionTable(rfpl);
+        new ListPlayerOptionTable().toPrint(rfpl);
         int choise = Corrector.InputIntMethod(0, 1);
         if(choise == 0) return;
         else{
