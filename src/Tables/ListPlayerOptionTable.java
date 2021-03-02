@@ -4,7 +4,6 @@ import Manager.ConcretStrategy;
 import Manager.Corrector;
 import Manager.Player;
 import Manager.Tournament;
-
 import java.util.ArrayList;
 import static java.lang.System.out;
 
@@ -17,12 +16,12 @@ public class ListPlayerOptionTable extends Table implements Data {
         String tech = Corrector.GetSpace(48);
         for(int x = 0; x < tableLong; x++) {
             for (int y = 0; y < 120; y++) {
-                if (y == 0 || y == 119) upBorderElement();
-                if ((x == 0 || x == 2 || x == tableLong - 1 || x == 4) && (y > 0 && y < 119)) borderElement();
+                if (y == 0 || y == 119) verSlash();
+                if ((x == 0 || x == 2 || x == tableLong - 1 || x == 4) && (y > 0 && y < 119)) dash();
                 if (x == 1 && y == 1) titleInChars(rfpl.my_team.name);
                 if ((x > 2 && x < tableLong - 1 && x != 4) && (y == 6 || y == 34 || y == 38 || y == 44 || y == 49 ||
                         y == 54 || y == 59 || y == 64 || y == 69 || y == 74 || y == 79 || y == 84 || y == 91 || y == 96 ||
-                        y == 102 || y == 107 || y == 112)) upBorderElement();
+                        y == 102 || y == 107 || y == 112)) verSlash();
                 if (x == 3 && y == 1) out.print("Count");
                 if (x == 3 && y == 7) out.print(toCenter("Name", 27));
                 if (x == 3 && y == 35) out.print("Num");
@@ -67,14 +66,6 @@ public class ListPlayerOptionTable extends Table implements Data {
             }
         }
         out.println("COMMANDS:\nMenu - \"1\"\nQuit to back menu - \"0\": ");
-    }
-
-    private static void upBorderElement(){
-        out.print("|");
-    }
-
-    private static void borderElement(){
-        out.print("-");
     }
 
     private static void titleInChars(String name){

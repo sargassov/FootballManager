@@ -11,11 +11,17 @@ import java.util.*;
 import static java.lang.System.exit;
 
 public class Strategy {
+    static Tournament rfpl;
     String name;
     public ConcretStrategy[] ConcretStrategyList;
     ArrayList<String>visualizer;
 
     public Strategy(){}
+
+    public Strategy(Tournament rfpl){
+        this.rfpl = rfpl;
+    }
+
     public Strategy(String description) {
         String coordinat = "C:\\Users\\Сергей\\IdeaProjects\\Football Manager\\src\\Manager\\";
         visualizer = new ArrayList<String>();

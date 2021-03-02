@@ -6,15 +6,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class OpenSource {
-    public static void Interface(Tournament rfpl) throws IOException {
-        ReaderTeams(rfpl);
-        ReaderPlayers(rfpl);
-        ReaderYoungers(rfpl);
+
+    Tournament rfpl;
+
+    public OpenSource(Tournament rfpl){
+        this.rfpl = rfpl;
+    }
+
+    public void unpack() throws IOException {
+        ReaderTeams();
+        ReaderPlayers();
+        ReaderYoungers();
     }
 
 
 
-    private static void ReaderPlayers (Tournament rfpl) throws IOException {
+    private void ReaderPlayers () throws IOException {
         try (FileReader InPlayers = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\" +
                 "Football Manager\\src\\Manager\\players.txt")) {
             BufferedReader reader = new BufferedReader(InPlayers);
@@ -38,7 +45,7 @@ public class OpenSource {
 
     }
 
-    private static void ReaderTeams (Tournament rfpl) throws IOException {
+    private void ReaderTeams () throws IOException {
         String name = "", town = "", stadium = "", coach = "";
         int capacity_stad = 0;
         double wealth = 0.0;
@@ -59,7 +66,7 @@ public class OpenSource {
         }
     }
 
-    private static void ReaderYoungers(Tournament rfpl) throws IOException {
+    private void ReaderYoungers() throws IOException {
         rfpl.youthPool = new ArrayList<Player>();
         try (FileReader InYoungers = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\" +
                 "Football Manager\\src\\Manager\\youthacademy.txt")) {

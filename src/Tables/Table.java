@@ -12,6 +12,18 @@ public class Table {
 
     protected static String del = "XXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
+    protected void dash(){
+        System.out.print("-");
+    }
+
+    protected void verSlash(){
+        System.out.print("|");
+    }
+
+    protected void space(){
+        out.println(" ");
+    }
+
 
 
 

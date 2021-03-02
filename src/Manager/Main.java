@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         MessageClass.WelcomeMessage();
         Scanner in =  new Scanner(System.in);
 
@@ -14,9 +14,9 @@ public class Main {
         GameCommander.NewGameCommander(command);
 
         if (command == 0) System.exit(0);
-        else if (command == 1) { NewGameCreator.CreateGame();
-
-
+        else if (command == 1) {
+            NewGameCreator creator = new NewGameCreator();
+            creator.CreateGame();
         }
         //else if(command == 2)
 

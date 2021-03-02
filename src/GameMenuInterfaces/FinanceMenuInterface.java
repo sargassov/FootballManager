@@ -14,7 +14,7 @@ public class FinanceMenuInterface implements GameMenuInterface {
         while(true){
             toPrintMenu(rfpl.interfaces.get(6).fields);
             int choise = Corrector.InputIntMethod(0, 2);
-            rfpl.CalendarMenuInterfaces.get(choise).GetOption(rfpl);
+            rfpl.FinanceMenuInterfaces.get(choise).GetOption(rfpl);
         }
     }
 
