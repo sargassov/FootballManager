@@ -11,7 +11,7 @@ import java.util.*;
 import static java.lang.System.exit;
 
 public class Strategy {
-    static Tournament rfpl;
+    private static Tournament rfpl;
     String name;
     public ConcretStrategy[] ConcretStrategyList;
     ArrayList<String>visualizer;
@@ -23,7 +23,7 @@ public class Strategy {
     }
 
     public Strategy(String description) {
-        String coordinat = "C:\\Users\\Сергей\\IdeaProjects\\Football Manager\\src\\Manager\\";
+        String coordinat = "src\\Manager\\";
         visualizer = new ArrayList<String>();
         ConcretStrategyList = new ConcretStrategy[18];
         name = description;
@@ -57,7 +57,7 @@ public class Strategy {
         }
     }
 
-    public static void strategy_creator(Tournament rfpl) {
+    public static void strategyСreator() {
         rfpl.strategies = new ArrayList<Strategy>();
         Strategy strategyOne = new Strategy("4 - 4 - 2");
         rfpl.strategies.add(strategyOne);
@@ -73,7 +73,7 @@ public class Strategy {
         //autoStrategyCreator(rfpl);
     }
 
-    public static void autoStrategyCreator(Tournament rfpl){
+    public static void autoStrategyCreator(){
         Player currentPlayer, selectionPlayer;
         for (Team team : rfpl.teams) {//для каждой из 16 команд
             short ran = (short) (Math.random() * 5);//выбирается случайная из 5 стартегий
@@ -121,7 +121,7 @@ public class Strategy {
         return ReturnSign;
     }
 
-    public static void CaptainDeterminer(Tournament rfpl) {
+    public static void сaptainDeterminer() {
         short captainVal;
         Player capitan = null;
         for(Team team : rfpl.teams){
@@ -136,7 +136,7 @@ public class Strategy {
         }
     }
 
-    public static void PowerTeamCounter(Tournament rfpl) {
+    public static void powerTeamCounter() {
         for(Team team : rfpl.teams){
             for(Player player : team.list){
                 if(player.strategy_place > -1 && player.strategy_place < 11){

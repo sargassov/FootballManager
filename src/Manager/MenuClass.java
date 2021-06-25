@@ -7,8 +7,17 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 public class MenuClass {
-    public static void NewGameMenu(Tournament rfpl){
-        String name, lastname, club;
+
+    private static Tournament rfpl;
+    private String name;
+    private String lastname;
+    private String club;
+
+    public MenuClass(Tournament rfpl){
+        this.rfpl = rfpl;
+    }
+
+    public void newGameMenu(){
         out.print("\n\nEnter your name: ");
         Scanner scanner = new Scanner(System.in);
         //name = scanner.nextLine();
@@ -26,16 +35,16 @@ public class MenuClass {
         //cin >> club;///////////////////////////////////////////////////////////////////////////
         //club = scanner.nextLine();
         club = "Rostov";
-        is_club(rfpl, club, lastname);
+        isClub();
 
-        compareArrayLists(rfpl);
+        //compareArrayLists();
     }
 
-    private static void compareArrayLists(Tournament rfpl){
+//    private static void compareArrayLists(){
+//
+//    }
 
-    }
-
-    private static void is_club(Tournament rfpl, String club, String lastname) {
+    private void isClub() {
         short count = 0;
         for (Team team : rfpl.teams) {
             if (club.equals(team.name)) {
@@ -50,11 +59,11 @@ public class MenuClass {
             MessageClass.IncorrectName();
             Scanner scanner = new Scanner(System.in);
             club = scanner.nextLine();
-            is_club(rfpl, club, lastname);
+            isClub();
         }
     }
 
-    public static void GameMenu(Tournament rfpl){
+    public static void gameMenu(){
         toPrintMenu(rfpl.interfaces.get(0).fields);
         int choise = Corrector.InputIntMethod(0, 9);
         rfpl.userInterfaces.get(choise).Do(rfpl);

@@ -52,10 +52,8 @@ public class Tournament {
         FinanceMenuInterfacesConstructor();
         interfaces = null;
         currentDate = new GregorianCalendar(2019, 7,1);
-        transferPrintInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\" +
-                "Football Manager\\src\\Manager\\transfer_interface.txt");
-        visualCalendarInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\" +
-                "Football Manager\\src\\Manager\\visualCalendarInterface.txt");
+        transferPrintInterface = new Interface("src\\textFiles\\transfer_interface.txt");
+        visualCalendarInterface = new Interface("src\\textFiles\\visualCalendarInterface.txt");
     }
 
     private void FinanceMenuInterfacesConstructor(){

@@ -22,8 +22,7 @@ public class OpenSource {
 
 
     private void ReaderPlayers () throws IOException {
-        try (FileReader InPlayers = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\" +
-                "Football Manager\\src\\Manager\\players.txt")) {
+        try (FileReader InPlayers = new FileReader("src\\Sources\\players.txt")) {
             BufferedReader reader = new BufferedReader(InPlayers);
             String line = reader.readLine();
             while (line != null) {
@@ -49,8 +48,7 @@ public class OpenSource {
         String name = "", town = "", stadium = "", coach = "";
         int capacity_stad = 0;
         double wealth = 0.0;
-        try (FileReader InTeams = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\Football Manager" +
-                "\\src\\Manager\\clubs.txt")) {
+        try (FileReader InTeams = new FileReader("src\\Sources\\clubs.txt")) {
             BufferedReader reader = new BufferedReader(InTeams);
             String line = reader.readLine();
             int x = 0;
@@ -68,8 +66,7 @@ public class OpenSource {
 
     private void ReaderYoungers() throws IOException {
         rfpl.youthPool = new ArrayList<Player>();
-        try (FileReader InYoungers = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\" +
-                "Football Manager\\src\\Manager\\youthacademy.txt")) {
+        try (FileReader InYoungers = new FileReader("src\\Sources\\youthacademy.txt")) {
             BufferedReader reader = new BufferedReader(InYoungers);
             String line = reader.readLine();
             while (line != null) {

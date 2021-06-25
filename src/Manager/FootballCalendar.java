@@ -10,24 +10,28 @@ import java.lang.Cloneable;
 
 public class FootballCalendar implements Cloneable {
 
-    public static void SheduleCreator(Tournament rfpl) throws IOException {
+    private Tournament rfpl;
+
+    public FootballCalendar(Tournament rfpl){
+        this.rfpl = rfpl;
+    }
+
+    public void sheduleCreator() throws IOException {
         String result = "";
         GregorianCalendar startdate = new GregorianCalendar(2019, 7, 3);
         GregorianCalendar currentdate = startdate;
         out.println(startdate.toString());
-        Draw[] DrawList = new Draw[16];
+        Draw[] drawList = new Draw[16];
         List<Integer> num = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
         for (short x = 0; x < rfpl.teams.length; x++) {
             Draw draw = new Draw();
             int count = (int) (Math.random() * num.size());
-            //out.println(count);
-            draw.PlaceOfLot = num.get(count) + 1;
+            draw.placeOfLot = num.get(count) + 1;
             num.remove(count);
-            draw.NameOfTeam = rfpl.teams[x].name;
-            DrawList[x] = draw;
+            draw.nameOfTeam = rfpl.teams[x].name;
+            drawList[x] = draw;
         }
-        try (FileReader InCalendar = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\Football Manager" +
-                "\\src\\Manager\\calendar.txt")) {
+        try (FileReader InCalendar = new FileReader("src\\textFiles\\calendar.txt")) {
             BufferedReader reader = new BufferedReader(InCalendar);
             String line = reader.readLine();
             for (short x = 0; x < 30; x++) {
@@ -39,13 +43,13 @@ public class FootballCalendar implements Cloneable {
                     int home, away;
                     home = Integer.parseInt(match[0]);
                     away = Integer.parseInt(match[1]);
-                    for (Draw draw : DrawList) {
-                        if (draw.PlaceOfLot == home) {
-                            daymatch.home = draw.NameOfTeam;
-                            daymatch.stadium = GetStadium(draw.NameOfTeam, rfpl);
+                    for (Draw draw : drawList) {
+                        if (draw.placeOfLot == home) {
+                            daymatch.home = draw.nameOfTeam;
+                            daymatch.stadium = getStadium(draw.nameOfTeam, rfpl);
                         }
-                        if (draw.PlaceOfLot == away) {
-                            daymatch.away = draw.NameOfTeam;
+                        if (draw.placeOfLot == away) {
+                            daymatch.away = draw.nameOfTeam;
                         }
 
                     }
@@ -67,7 +71,7 @@ public class FootballCalendar implements Cloneable {
 
     }
 
-    public static void EditCalendar(Tournament rfpl) {
+    public void editCalendar() {
         for (ArrayList<DayMatch> DM : rfpl.shedule) {
             for (DayMatch dm : DM) {
                 out.println(dm.toString());
@@ -84,7 +88,7 @@ public class FootballCalendar implements Cloneable {
                 if(rfpl.shedule.get(count).get(0).date.get(Calendar.DAY_OF_MONTH) ==
                         startdate.get(Calendar.DAY_OF_MONTH) && rfpl.shedule.get(count).get(0).date.get(Calendar.MONTH) ==
                         startdate.get(Calendar.MONTH) ){
-                    day = GetDayMatchFromShedule(rfpl.shedule.get(count), rfpl.my_team.name);
+                    day = getDayMatchFromShedule(rfpl.shedule.get(count), rfpl.my_team.name);
                     count++;
                     //if(count > 29) count = 29;
                 }
@@ -111,14 +115,11 @@ public class FootballCalendar implements Cloneable {
                     DayTrain dt = (DayTrain) day;
                     out.println(dt.toString());
                 }
-                //for(Day day : month){
-                //
-                //}
             }
         }
     }
 
-    private static DayMatch GetDayMatchFromShedule(ArrayList<DayMatch>shedule, String TeamName){
+    private DayMatch getDayMatchFromShedule(ArrayList<DayMatch>shedule, String TeamName){
         for(DayMatch dayMatch : shedule){
             if(dayMatch.home.equals(TeamName) || dayMatch.away.equals(TeamName)){
                 return dayMatch;
@@ -127,7 +128,7 @@ public class FootballCalendar implements Cloneable {
         return new DayMatch();
     }
 
-    private static void SheduleComparer(Tournament rfpl, Day day) {
+    private void sheduleComparer(Tournament rfpl, Day day) {
         for (ArrayList<DayMatch> tour : rfpl.shedule) {
             if (day.date.get(Calendar.DAY_OF_MONTH) == tour.get(0).date.get(Calendar.DAY_OF_MONTH) &&
                     day.date.get(Calendar.MONTH) == tour.get(0).date.get(Calendar.MONTH)) {
@@ -144,7 +145,7 @@ public class FootballCalendar implements Cloneable {
         }
     }
 
-    public static String GetStadium(String name, Tournament rfpl) {
+    public String getStadium(String name, Tournament rfpl) {
         for (Team team : rfpl.teams) {
             if (name.equals(team.name)) {
                 return team.stadium;

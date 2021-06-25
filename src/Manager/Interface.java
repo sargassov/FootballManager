@@ -10,12 +10,21 @@ import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class Interface {
+
+    private static Tournament rfpl;
+
     public ArrayList<String> fields;
+
     public Interface(){}
+
+    public Interface(Tournament r){
+        rfpl = r;
+    }
+
     public Interface(String fileName) {
         try (FileReader InInteface = new FileReader(fileName)){
             BufferedReader reader = new BufferedReader(InInteface);
-            fields = new ArrayList<String>();
+            fields = new ArrayList<>();
             String line = reader.readLine();
             while (line != null) {
                fields.add(line);
@@ -27,27 +36,22 @@ public class Interface {
         }
     }
 
-    public static void CreateInterfaces(Tournament rfpl){
+    public static void createInterfaces(){
         rfpl.interfaces = new ArrayList<Interface>();
-        Interface GameMenuInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\Football " +
-                "Manager\\src\\Manager\\GameMenuInterface.txt");
+        Interface GameMenuInterface = new Interface("src\\textFiles\\GameMenuInterface.txt");
         rfpl.interfaces.add(GameMenuInterface);
         Interface NextMatchInterface = new Interface();
         rfpl.interfaces.add(NextMatchInterface);
         Interface TeamInterface = new Interface
-                ("C:\\Users\\Сергей\\IdeaProjects\\Football Manager\\src\\Manager\\TeamInterface.txt");
+                ("src\\textFiles\\TeamInterface.txt");
         rfpl.interfaces.add(TeamInterface);
-        Interface TrainingInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\" +
-                "Football Manager\\src\\Manager\\TrainingInterface.txt");
+        Interface TrainingInterface = new Interface("src\\textFiles\\TrainingInterface.txt");
         rfpl.interfaces.add(TrainingInterface);
-        Interface TransferInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\Football Manager" +
-                "\\src\\Manager\\TransferInterface.txt");
+        Interface TransferInterface = new Interface("src\\textFiles\\TransferInterface.txt");
         rfpl.interfaces.add(TransferInterface);
-        Interface CalendarInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\Football " +
-                "Manager\\src\\Manager\\CalendarInterface.txt");
+        Interface CalendarInterface = new Interface("src\\textFiles\\CalendarInterface.txt");
         rfpl.interfaces.add(CalendarInterface);
-        Interface FinanceInterface = new Interface("C:\\Users\\Сергей\\IdeaProjects\\Football " +
-                "Manager\\src\\Manager\\financeMenu.txt");
+        Interface FinanceInterface = new Interface("src\\textFiles\\financeMenu.txt");
         rfpl.interfaces.add(FinanceInterface);
         Interface StadiumInterface = new Interface();
         rfpl.interfaces.add(StadiumInterface);
@@ -66,8 +70,8 @@ public class Interface {
         }
     }
 
-    public static void readCoachInterface(Tournament rfpl) throws IOException {
-        try (FileReader coachInt = new FileReader("C:\\Users\\Сергей\\IdeaProjects\\Football Manager\\src\\Manager\\coach.txt")) {
+    public static void readCoachInterface() throws IOException {
+        try (FileReader coachInt = new FileReader("src\\textFiles\\coach.txt")) {
             rfpl.my_team.coachInterface = new ArrayList<>();
             BufferedReader reader = new BufferedReader(coachInt);
             String line = reader.readLine();

@@ -3,7 +3,14 @@ package Manager;
 import java.util.ArrayList;
 
 public class YouthAcademy {
-    public static void YouthAcademyPlayersAdd(Tournament rfpl) {
+
+    Tournament rfpl;
+
+    public YouthAcademy(Tournament rfpl){
+        this.rfpl = rfpl;
+    }
+
+    public void youthAcademyPlayersAdd() {
         String pos;
         for (Team team : rfpl.teams)
             if (!rfpl.my_team.name.equals(team.name)) {

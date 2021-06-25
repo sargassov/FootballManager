@@ -34,17 +34,26 @@ public class NewGameCreator {
         openSource.unpack();
 
         Strategy strategy = new Strategy(rfpl);
-        Strategy.strategy_creator(rfpl);
-        Strategy.autoStrategyCreator(rfpl);
-        Strategy.CaptainDeterminer(rfpl);
-        Strategy.PowerTeamCounter(rfpl);
-        MenuClass.NewGameMenu(rfpl);
-        YouthAcademy.YouthAcademyPlayersAdd(rfpl);
-        FootballCalendar.SheduleCreator(rfpl);
-        FootballCalendar.EditCalendar(rfpl);
-        Interface.CreateInterfaces(rfpl);
-        Interface.readCoachInterface(rfpl);
-        MenuClass.GameMenu(rfpl);
+        Strategy.strategyСreator();
+        Strategy.autoStrategyCreator();
+        Strategy.сaptainDeterminer();
+        Strategy.powerTeamCounter();
+
+        MenuClass menuClass = new MenuClass(rfpl);
+        menuClass.newGameMenu();
+
+        YouthAcademy youthAcademy = new YouthAcademy(rfpl);
+        youthAcademy.youthAcademyPlayersAdd();
+
+        FootballCalendar footballCalendar = new FootballCalendar(rfpl);
+        footballCalendar.sheduleCreator();
+        footballCalendar.editCalendar();
+
+        Interface in = new Interface(rfpl);
+        Interface.createInterfaces();
+        Interface.readCoachInterface();
+
+        MenuClass.gameMenu();
     }
 }
 
