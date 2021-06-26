@@ -1,10 +1,9 @@
 package Manager;
 
-import javafx.util.Pair;
+
 
 import java.util.ArrayList;
 
-import static jdk.nashorn.internal.objects.NativeString.indexOf;
 
 public class Player {
     public String name;

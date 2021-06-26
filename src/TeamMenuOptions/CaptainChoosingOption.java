@@ -2,7 +2,6 @@ package TeamMenuOptions;
 import Manager.Corrector;
 import Manager.Player;
 import Manager.Tournament;
-import jdk.nashorn.internal.runtime.options.Option;
 
 import java.util.*;
 import java.util.function.Function;
